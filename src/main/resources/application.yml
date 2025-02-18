@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: qsl_tutorial
+  #DATABASE
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3305/qsl?useUnicode=utf8&autoReconnent=true&serverTimezone=Asia/Seoul
+    username: root
+    password: 1004
+
+  #JPA
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+  #CONSOLE
+  output:
+    ansi:
+      enabled: always

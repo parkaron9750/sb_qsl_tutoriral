@@ -21,8 +21,20 @@ class QslTutorialApplicationTests {
 	@Test
 	@DisplayName("회원 생성")
 	void createUserTest() {
-		SiteUser user1 = new SiteUser(null, "user1", "{noop}1234", "user1@qsl.com");
-		SiteUser user2 = new SiteUser(null, "user2", "{noop}1234", "user2@qsl.com");
+		SiteUser user1 = SiteUser.builder()
+				.username("user1")
+				.password("{noop}1234")
+				.email("user1@qsl.com")
+				.build();
+
+		SiteUser user2 = SiteUser.builder()
+				.username("user2")
+				.password("{noop}1234")
+				.email("user2@qsl.com")
+				.build();
+
+//		SiteUser user1 = new SiteUser(null, "user1", "{noop}1234", "user1@qsl.com");
+//		SiteUser user2 = new SiteUser(null, "user2", "{noop}1234", "user2@qsl.com");
 
 		repository.saveAll(Arrays.asList(user1, user2));
 	}

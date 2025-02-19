@@ -7,13 +7,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@ActiveProfiles({"test"})
+@Transactional
+@ActiveProfiles("test")
 class  QslTutorialApplicationTests {
 
 	@Autowired
@@ -47,6 +49,15 @@ class  QslTutorialApplicationTests {
 		assertThat(user.getUsername()).isEqualTo("user3");
 		assertThat(user.getPassword()).isEqualTo("{noop}1234");
 		assertThat(user.getEmail()).isEqualTo("user3@qsl.com");
+	}
+
+	@Test
+	@DisplayName("모든 회원 수")
+	void totalUserTest(){
+		long count = repository.getQslCount();
+
+
+		assertThat(count).isEqualTo(2L);
 	}
 
 }

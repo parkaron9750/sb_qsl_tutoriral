@@ -18,4 +18,12 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
                 .where(siteUser.id.eq(id))
                 .fetchOne();
     }
+
+    @Override
+    public long getQslCount() {
+        return queryFactory
+                .select(siteUser.count())
+                .from(siteUser)
+                .fetchOne();
+    }
 }

@@ -2,6 +2,7 @@ package com.qsl.qsl_tutorial;
 
 import com.qsl.qsl_tutorial.boundedcontext.user.entity.SiteUser;
 import com.qsl.qsl_tutorial.boundedcontext.user.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.List;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 @SpringBootTest
 @Transactional
 @ActiveProfiles("test")
@@ -76,6 +80,18 @@ class  QslTutorialApplicationTests {
 	@DisplayName("전체 회원을 조회 오래된 순으로")
 	void oldUserTest2(){
 		repository.getQslOldUsersAsc();
+	}
+
+	@Test
+	@DisplayName("회원 검색 기능")
+	void searchUserTest(){
+		List<SiteUser> userSearch = repository.searchQsl("user3");
+		List<SiteUser> emailSearch = repository.searchQsl("user3@qsl.com");
+
+		SiteUser user = userSearch.get(0);
+		log.info("userSearch={}", userSearch);
+		assertThat(user.getUsername()).isEqualTo("user3");
+
 	}
 
 

@@ -12,4 +12,6 @@ public interface UserRepositoryCustom  {
     SiteUser getQslOldUserAscOne();
 
     List<SiteUser> getQslOldUsersAsc();
+
+    List<SiteUser> searchQsl(String keyword);
 }

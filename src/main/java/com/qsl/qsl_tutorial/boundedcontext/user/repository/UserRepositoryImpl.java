@@ -53,7 +53,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     }
 
     /**
-     * 회원 수 전체 조회 오래된 순으로
+     * 회원 수 전체 조회 오래된 순으로 정렬
      * @return
      */
     @Override
@@ -61,6 +61,20 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
         return queryFactory
                 .selectFrom(siteUser)
                 .orderBy(siteUser.id.asc())
+                .fetch();
+    }
+
+    /**
+     * 키워드 설정
+     * @param keyword
+     * @return
+     */
+    @Override
+    public List<SiteUser> searchQsl(String keyword) {
+        return queryFactory
+                .selectFrom(siteUser)
+                .where(siteUser.username.contains(keyword)
+                        .or(siteUser.email.contains(keyword)))
                 .fetch();
     }
 }

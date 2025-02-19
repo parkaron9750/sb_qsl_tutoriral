@@ -4,6 +4,8 @@ import com.qsl.qsl_tutorial.boundedcontext.user.entity.SiteUser;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 import static com.qsl.qsl_tutorial.boundedcontext.user.entity.QSiteUser.siteUser;
 
 @RequiredArgsConstructor
@@ -48,5 +50,17 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
                 .orderBy(siteUser.id.asc())
                 .limit(1)
                 .fetchOne();
+    }
+
+    /**
+     * 회원 수 전체 조회 오래된 순으로
+     * @return
+     */
+    @Override
+    public List<SiteUser> getQslOldUsersAsc() {
+        return queryFactory
+                .selectFrom(siteUser)
+                .orderBy(siteUser.id.asc())
+                .fetch();
     }
 }

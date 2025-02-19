@@ -60,4 +60,16 @@ class  QslTutorialApplicationTests {
 		assertThat(count).isEqualTo(2L);
 	}
 
+	@Test
+	@DisplayName("가장 오래된 회원")
+	void oldUserTest(){
+		SiteUser oldUser = repository.getQslOldUserAscOne();
+
+		assertThat(oldUser.getId()).isEqualTo(1L);
+		assertThat(oldUser.getUsername()).isEqualTo("user3");
+		assertThat(oldUser.getPassword()).isEqualTo("{noop}1234");
+		assertThat(oldUser.getEmail()).isEqualTo("user3@qsl.com");
+		
+	}
+
 }
